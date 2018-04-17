@@ -1,2 +1,6 @@
+let nPort = 8000;
+let sHost = 'localhost';
 const myServer = require('./myServer');
-myServer.start();
+const myRouter = require('./myRouter');
+
+myServer.start(nPort, sHost, myRouter.route);
