@@ -1,4 +1,8 @@
 const queryString = require('querystring');
+const myBrain = require('./myBrain');
+const myData = require('./twitterDonKim');
+
+let trainedNet = myBrain.train(myData.trainingData);
 
 function sleep(millisec) {
     let timeStart = new Date().getTime();
