@@ -3,8 +3,16 @@ const url = require('url');
 
 function start(port, hostname, route, handle) {
     function onRequest(req, res) {
+        let sPostData = '';
         let sPathname = url.parse(req.url).pathname;
-        route(sPathname, handle, res);
+        req.setEncoding('utf8');
+        req.addListener('data', function (dataChunk) {
+            sPostData += dataChunk;
+            console.log('Chunk = ' + dataChunk);
+        });
+        req.addListener('end', function () {
+            route(sPathname, handle, res, sPostData);
+        });
     }
 
     http.createServer(onRequest).listen(port, hostname);
