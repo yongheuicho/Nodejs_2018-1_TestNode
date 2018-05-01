@@ -2,8 +2,8 @@ const http = require('http');
 const url = require('url');
 
 function start(port, hostname, route, handle) {
+    let sPostData = '';
     function onRequest(req, res) {
-        let sPostData = '';
         let sPathname = url.parse(req.url).pathname;
         req.setEncoding('utf8');
         req.addListener('data', function (dataChunk) {
